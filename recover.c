@@ -8,11 +8,11 @@ int main(int argc, char *argv[])
     // check if the command line argument is correct
     if (argc != 2)
     {
-        printf("Usage: ./recover IMAGE\n");
+        printf("Usage: ./recover IMAGE.raw\n");
         return 1;
     }
 
-    // open memory card file
+    // opening the raw file
     FILE *card = fopen(argv[1], "r");
     if (card == NULL)
     {
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     FILE *img;
     char filename[8];
 
-    // reading the entire card and looking for a jpeg file
+    // reading the entire raw file and looking for a jpeg file
     while (fread(buffer, sizeof(uint8_t), block_size, card) == block_size)
     {
         // checking if the file is a jpeg
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    // closing the file
+    // closing the files
     if (flag == true)
     {
         fclose(img);
